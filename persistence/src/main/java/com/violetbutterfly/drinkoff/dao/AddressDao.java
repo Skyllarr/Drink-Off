@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class AddressDao extends AbstractDao<Address> {
+public class AddressDao extends AbstractStringIdEntityDao<Address> {
 
     public AddressDao() {
         super(Address.class);

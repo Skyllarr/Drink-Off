@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-public class Discount extends AbstractEntity {
+public class Discount extends AbstractStringIdEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;

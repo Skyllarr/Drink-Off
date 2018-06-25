@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDao extends AbstractDao<User> {
+public class UserDao extends AbstractStringIdEntityDao<User> {
     @PersistenceContext
     private EntityManager em;
 

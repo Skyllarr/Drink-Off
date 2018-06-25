@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
-public class Address extends AbstractEntity {
+public class Address extends AbstractStringIdEntity {
 
     @Column(nullable = false, length = 250)
     private String street;

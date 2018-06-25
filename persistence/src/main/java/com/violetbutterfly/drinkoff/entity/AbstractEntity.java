@@ -1,24 +1,18 @@
 package com.violetbutterfly.drinkoff.entity;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public abstract class AbstractEntity<T extends Serializable> {
 
     @Column(nullable = false)
     private boolean deleted;
 
-    public Long getId() {
-        return id;
-    }
+    public abstract T getId();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public abstract void setId(T id);
 
     public boolean isDeleted() {
         return deleted;
@@ -26,18 +20,5 @@ public abstract class AbstractEntity {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AbstractEntity)) return false;
-        AbstractEntity that = (AbstractEntity) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }

@@ -5,9 +5,10 @@ import com.violetbutterfly.drinkoff.entity.AbstractEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractDao<T extends AbstractEntity> {
+public abstract class AbstractDao<M extends Serializable, T extends AbstractEntity<M>> {
 
     @PersistenceContext
     EntityManager em;
@@ -43,7 +44,7 @@ public abstract class AbstractDao<T extends AbstractEntity> {
         }
     }
 
-    public T findById(Long id) {
+    public T findById(M id) {
         try {
             return em.createQuery("select c from " + clazz.getName() + " c where c.deleted = :deleted and c.id = :id", clazz)
                     .setParameter("deleted", false)
@@ -54,7 +55,7 @@ public abstract class AbstractDao<T extends AbstractEntity> {
         }
     }
 
-    public T findById(Long id, boolean deleted) {
+    public T findById(M id, boolean deleted) {
         if (deleted) {
             return em.find(clazz, id);
         } else {
