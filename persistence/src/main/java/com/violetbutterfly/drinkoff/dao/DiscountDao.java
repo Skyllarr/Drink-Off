@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class DiscountDao extends AbstractDao<Discount> {
+public class DiscountDao extends AbstractStringIdEntityDao<Discount> {
     @PersistenceContext
     private EntityManager em;
 

@@ -13,13 +13,25 @@ import java.util.List;
 
 @Repository
 @Component
-public class CompanyDao extends AbstractDao<Company> {
+public class CompanyDao extends AbstractStringIdEntityDao<Company> {
 
     @PersistenceContext
     private EntityManager em;
 
     public CompanyDao() {
         super(Company.class);
+    }
+
+    public Company findByName(String name) {
+        try {
+            return em.createQuery("SELECT c FROM Company c WHERE c.deleted = :deleted and lower(name) like CONCAT('%', lower(:name), '%')",
+                    Company.class)
+                    .setParameter("deleted", false)
+                    .setParameter("name", name)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     public Company findByPhoneNumber(String phoneNumber) {
@@ -46,12 +58,16 @@ public class CompanyDao extends AbstractDao<Company> {
         }
     }
 
-    public List<Company> findByUser(User user) {
-        return em.createQuery("select c from Company c WHERE c.deleted = :deleted and c.user.id = :userId",
-                Company.class)
-                .setParameter("deleted", false)
-                .setParameter("userId", user.getId())
-                .getResultList();
+    public Company findByUser(User user) {
+        try {
+            return em.createQuery("select c from Company c WHERE c.deleted = :deleted and c.user.id = :userId",
+                    Company.class)
+                    .setParameter("deleted", false)
+                    .setParameter("userId", user.getId())
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     public List<Company> findByState(String state) {

@@ -98,7 +98,7 @@ public class CompanyDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findCompanyByUserTest() {
-        Assert.assertEquals(companyDao.findByUser(user1).get(0), company);
+        Assert.assertEquals(companyDao.findByUser(user1), company);
     }
 
     @Test
@@ -149,6 +149,7 @@ public class CompanyDaoTest extends AbstractTestNGSpringContextTests {
         addressDao.create(address);
 
         company = new Company();
+        company.setName("companyName");
         company.setDeleted(false);
         company.setUser(user1);
         company.setAddress(address);
@@ -168,6 +169,7 @@ public class CompanyDaoTest extends AbstractTestNGSpringContextTests {
 
     private Company createCompany() {
         Company tempCompany = new Company();
+        tempCompany.setName("tempName");
         tempCompany.setUser(user2);
         tempCompany.setAddress(address);
         tempCompany.setPhoneNumber("58545");

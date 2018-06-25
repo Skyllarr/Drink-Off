@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Company extends AbstractEntity {
+public class Company extends AbstractStringIdEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Address address;
@@ -14,6 +14,12 @@ public class Company extends AbstractEntity {
 
     @Column(nullable = false, length = 20)
     private String phoneNumber;
+
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @Column(nullable = true, length = 2500)
+    private String description;
 
     public Address getAddress() {
         return address;
@@ -53,5 +59,21 @@ public class Company extends AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), address, user, phoneNumber);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

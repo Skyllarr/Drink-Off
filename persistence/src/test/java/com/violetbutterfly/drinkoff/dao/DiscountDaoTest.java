@@ -137,6 +137,7 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         company.setPhoneNumber("+421 080 584");
         company.setUser(user);
         company.setAddress(address);
+        company.setName("companyName");
         companyDao.create(company);
 
         discount = new Discount();
@@ -157,6 +158,7 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         tempCompany.setUser(user2);
         tempCompany.setAddress(address);
         tempCompany.setPhoneNumber("58545");
+        tempCompany.setName("tempCompanyName");
         companyDao.create(tempCompany);
 
         Discount tempDiscount = new Discount();

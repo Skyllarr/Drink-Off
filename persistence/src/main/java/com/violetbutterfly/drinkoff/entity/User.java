@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Account")
-public class User extends AbstractEntity {
+public class User extends AbstractStringIdEntity {
 
     @Column(nullable = false, unique = true)
     private String nick;
