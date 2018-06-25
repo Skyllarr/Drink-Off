@@ -1,4 +1,4 @@
-package com.violetbutterfly.drinkoff.entity;
+package com.violetbutterfly.drinkoff.persistence.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -17,6 +17,12 @@ public class Company extends AbstractStringIdEntity {
 
     @Column(nullable = false, length = 50)
     private String name;
+
+    @Column(nullable = false, unique = true, length = 2083)
+    private String url;
+
+    @Column(nullable = false, unique = true, length = 200)
+    private String ico;
 
     @Column(nullable = true, length = 2500)
     private String description;
@@ -45,22 +51,6 @@ public class Company extends AbstractStringIdEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Company)) return false;
-        if (!super.equals(o)) return false;
-        Company company = (Company) o;
-        return Objects.equals(address, company.address) &&
-                Objects.equals(user, company.user) &&
-                Objects.equals(phoneNumber, company.phoneNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), address, user, phoneNumber);
-    }
-
     public String getName() {
         return name;
     }
@@ -75,5 +65,37 @@ public class Company extends AbstractStringIdEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Company)) return false;
+        if (!super.equals(o)) return false;
+        Company company = (Company) o;
+        return Objects.equals(address, company.address) &&
+                Objects.equals(user, company.user) &&
+                Objects.equals(ico, company.ico);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), address, user, ico);
     }
 }

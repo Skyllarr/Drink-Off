@@ -1,4 +1,4 @@
-package com.violetbutterfly.drinkoff;
+package com.violetbutterfly.drinkoff.persistence;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan("com.violetbutterfly.drinkoff.dao")
+@ComponentScan("com.violetbutterfly.drinkoff.persistence.dao")
 public class PersistenceApplicationContext {
 
     /**

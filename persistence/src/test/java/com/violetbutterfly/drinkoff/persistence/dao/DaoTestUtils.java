@@ -1,6 +1,6 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.entity.AbstractStringIdEntity;
+import com.violetbutterfly.drinkoff.persistence.entity.AbstractStringIdEntity;
 import org.testng.Assert;
 
 public class DaoTestUtils {

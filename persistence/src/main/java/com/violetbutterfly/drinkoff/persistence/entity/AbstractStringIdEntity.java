@@ -1,4 +1,4 @@
-package com.violetbutterfly.drinkoff.entity;
+package com.violetbutterfly.drinkoff.persistence.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 

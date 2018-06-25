@@ -1,8 +1,8 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.entity.Address;
-import com.violetbutterfly.drinkoff.entity.Company;
-import com.violetbutterfly.drinkoff.entity.User;
+import com.violetbutterfly.drinkoff.persistence.entity.Address;
+import com.violetbutterfly.drinkoff.persistence.entity.Company;
+import com.violetbutterfly.drinkoff.persistence.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -92,5 +92,25 @@ public class CompanyDao extends AbstractStringIdEntityDao<Company> {
                 .setParameter("deleted", false)
                 .setParameter("country", country)
                 .getResultList();
+    }
+
+    public List<Company> findByUrl(String url) {
+        return em.createQuery("select c from Company c WHERE c.deleted = :deleted and c.url = :url",
+                Company.class)
+                .setParameter("deleted", false)
+                .setParameter("url", url)
+                .getResultList();
+    }
+
+    public Company findByIco(String ico) {
+        try {
+            return em.createQuery("select c from Company c WHERE c.deleted = :deleted and c.ico = :ico",
+                    Company.class)
+                    .setParameter("deleted", false)
+                    .setParameter("ico", ico)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }

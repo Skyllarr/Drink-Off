@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>persistence</artifactId>
-    <packaging>jar</packaging>
 
     <name>persistence</name>
 
@@ -19,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.violetbutterfly</groupId>
+            <artifactId>api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>

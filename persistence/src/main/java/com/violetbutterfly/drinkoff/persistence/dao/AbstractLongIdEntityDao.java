@@ -1,6 +1,6 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.entity.AbstractLongIdEntity;
+import com.violetbutterfly.drinkoff.persistence.entity.AbstractLongIdEntity;
 
 public class AbstractLongIdEntityDao<T extends AbstractLongIdEntity> extends AbstractDao<Long, T>{
 

@@ -1,7 +1,7 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.entity.Company;
-import com.violetbutterfly.drinkoff.entity.Discount;
+import com.violetbutterfly.drinkoff.persistence.entity.Company;
+import com.violetbutterfly.drinkoff.persistence.entity.Discount;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

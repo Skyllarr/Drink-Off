@@ -1,4 +1,4 @@
-package com.violetbutterfly.drinkoff.enums;
+package com.violetbutterfly.drinkoff.api.enums;
 
 public enum Role {
     ADMIN, PLAYER, COMPANY

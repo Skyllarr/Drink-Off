@@ -1,7 +1,7 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.PersistenceApplicationContext;
-import com.violetbutterfly.drinkoff.entity.Address;
+import com.violetbutterfly.drinkoff.persistence.PersistenceApplicationContext;
+import com.violetbutterfly.drinkoff.persistence.entity.Address;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ContextConfiguration;

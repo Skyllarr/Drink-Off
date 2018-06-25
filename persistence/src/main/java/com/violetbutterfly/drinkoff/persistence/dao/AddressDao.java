@@ -1,6 +1,6 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.entity.Address;
+import com.violetbutterfly.drinkoff.persistence.entity.Address;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;

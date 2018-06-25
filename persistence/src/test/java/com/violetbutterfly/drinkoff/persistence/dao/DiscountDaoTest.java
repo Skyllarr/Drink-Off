@@ -1,11 +1,11 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.PersistenceApplicationContext;
-import com.violetbutterfly.drinkoff.entity.Address;
-import com.violetbutterfly.drinkoff.entity.Company;
-import com.violetbutterfly.drinkoff.entity.Discount;
-import com.violetbutterfly.drinkoff.entity.User;
-import com.violetbutterfly.drinkoff.enums.Role;
+import com.violetbutterfly.drinkoff.persistence.PersistenceApplicationContext;
+import com.violetbutterfly.drinkoff.api.enums.Role;
+import com.violetbutterfly.drinkoff.persistence.entity.Address;
+import com.violetbutterfly.drinkoff.persistence.entity.Company;
+import com.violetbutterfly.drinkoff.persistence.entity.Discount;
+import com.violetbutterfly.drinkoff.persistence.entity.User;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ContextConfiguration;
@@ -138,6 +138,8 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         company.setUser(user);
         company.setAddress(address);
         company.setName("companyName");
+        company.setIco("CZ12345678");
+        company.setUrl("www.example_company_page.cz");
         companyDao.create(company);
 
         discount = new Discount();
@@ -159,6 +161,8 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         tempCompany.setAddress(address);
         tempCompany.setPhoneNumber("58545");
         tempCompany.setName("tempCompanyName");
+        tempCompany.setIco("SK987654321");
+        tempCompany.setUrl("www.another_example_company_page.cz");
         companyDao.create(tempCompany);
 
         Discount tempDiscount = new Discount();

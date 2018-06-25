@@ -1,6 +1,6 @@
-package com.violetbutterfly.drinkoff.entity;
+package com.violetbutterfly.drinkoff.persistence.entity;
 
-import com.violetbutterfly.drinkoff.enums.Role;
+import com.violetbutterfly.drinkoff.api.enums.Role;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;

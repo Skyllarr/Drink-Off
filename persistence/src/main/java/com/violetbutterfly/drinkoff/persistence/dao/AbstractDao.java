@@ -1,6 +1,6 @@
-package com.violetbutterfly.drinkoff.dao;
+package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.entity.AbstractEntity;
+import com.violetbutterfly.drinkoff.persistence.entity.AbstractEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,7 +13,7 @@ public abstract class AbstractDao<M extends Serializable, T extends AbstractEnti
     @PersistenceContext
     EntityManager em;
 
-    private Class<T> clazz;
+    Class<T> clazz;
 
     AbstractDao(Class<T> clazz) {
         this.clazz = clazz;
