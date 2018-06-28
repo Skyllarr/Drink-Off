@@ -104,7 +104,7 @@ public class CompanyDao extends AbstractStringIdEntityDao<Company> {
 
     public Company findByIco(String ico) {
         try {
-            return em.createQuery("select c from Company c WHERE c.deleted = :deleted and c.ico = :ico",
+            return em.createQuery("select c from Company c WHERE c.deleted = :deleted and c.crn = :ico",
                     Company.class)
                     .setParameter("deleted", false)
                     .setParameter("ico", ico)

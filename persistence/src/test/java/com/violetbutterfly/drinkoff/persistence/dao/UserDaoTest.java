@@ -1,7 +1,7 @@
 package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.persistence.PersistenceApplicationContext;
 import com.violetbutterfly.drinkoff.api.enums.Role;
+import com.violetbutterfly.drinkoff.persistence.PersistenceApplicationContext;
 import com.violetbutterfly.drinkoff.persistence.entity.User;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.orm.jpa.JpaSystemException;

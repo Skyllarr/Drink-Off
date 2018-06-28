@@ -4,7 +4,6 @@ import com.violetbutterfly.drinkoff.api.enums.Role;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Account")
@@ -64,18 +63,5 @@ public class User extends AbstractStringIdEntity {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(email);
     }
 }

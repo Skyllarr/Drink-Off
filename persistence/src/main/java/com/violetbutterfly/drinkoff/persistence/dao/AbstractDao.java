@@ -13,7 +13,7 @@ public abstract class AbstractDao<M extends Serializable, T extends AbstractEnti
     @PersistenceContext
     EntityManager em;
 
-    Class<T> clazz;
+    private Class<T> clazz;
 
     AbstractDao(Class<T> clazz) {
         this.clazz = clazz;

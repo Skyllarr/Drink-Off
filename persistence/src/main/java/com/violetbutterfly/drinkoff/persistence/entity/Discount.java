@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import java.util.Objects;
 
 @Entity
 public class Discount extends AbstractStringIdEntity {
@@ -37,20 +36,5 @@ public class Discount extends AbstractStringIdEntity {
 
     public void setProduct(String product) {
         this.product = product;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Discount)) return false;
-        if (!super.equals(o)) return false;
-        Discount discount = (Discount) o;
-        return Objects.equals(company, discount.company) &&
-                Objects.equals(product, discount.product);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), company, product);
     }
 }

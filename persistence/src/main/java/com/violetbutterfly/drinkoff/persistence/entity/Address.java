@@ -2,7 +2,6 @@ package com.violetbutterfly.drinkoff.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.util.Objects;
 
 @Entity
 public class Address extends AbstractStringIdEntity {
@@ -16,7 +15,7 @@ public class Address extends AbstractStringIdEntity {
     @Column(nullable = false, length = 100)
     private String city;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String state;
 
     @Column(nullable = false, length = 100)
@@ -26,7 +25,6 @@ public class Address extends AbstractStringIdEntity {
     private String zipcode;
 
     public Address() {
-
     }
 
     public Address(String street, String houseNumber, String city, String state, String country, String zipcode) {
@@ -84,24 +82,5 @@ public class Address extends AbstractStringIdEntity {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Address address = (Address) o;
-        return Objects.equals(street, address.street) &&
-                Objects.equals(houseNumber, address.houseNumber) &&
-                Objects.equals(city, address.city) &&
-                Objects.equals(state, address.state) &&
-                Objects.equals(country, address.country) &&
-                Objects.equals(zipcode, address.zipcode);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), street, houseNumber, city, state, country, zipcode);
     }
 }

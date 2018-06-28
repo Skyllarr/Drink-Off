@@ -1,7 +1,6 @@
 package com.violetbutterfly.drinkoff.persistence.entity;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class Company extends AbstractStringIdEntity {
@@ -15,16 +14,16 @@ public class Company extends AbstractStringIdEntity {
     @Column(nullable = false, length = 20)
     private String phoneNumber;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 2083)
+    @Column(nullable = false, unique = true, length = 2000)
     private String url;
 
     @Column(nullable = false, unique = true, length = 200)
-    private String ico;
+    private String crn;
 
-    @Column(nullable = true, length = 2500)
+    @Column(length = 2500)
     private String description;
 
     public Address getAddress() {
@@ -75,27 +74,11 @@ public class Company extends AbstractStringIdEntity {
         this.url = url;
     }
 
-    public String getIco() {
-        return ico;
+    public String getCrn() {
+        return crn;
     }
 
-    public void setIco(String ico) {
-        this.ico = ico;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Company)) return false;
-        if (!super.equals(o)) return false;
-        Company company = (Company) o;
-        return Objects.equals(address, company.address) &&
-                Objects.equals(user, company.user) &&
-                Objects.equals(ico, company.ico);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), address, user, ico);
+    public void setCrn(String ico) {
+        this.crn = ico;
     }
 }

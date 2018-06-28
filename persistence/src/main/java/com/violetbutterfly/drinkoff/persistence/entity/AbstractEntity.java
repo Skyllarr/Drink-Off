@@ -5,7 +5,7 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class AbstractEntity<T   extends Serializable> {
+public abstract class AbstractEntity<T extends Serializable> {
 
     @Column(nullable = false)
     private boolean deleted;

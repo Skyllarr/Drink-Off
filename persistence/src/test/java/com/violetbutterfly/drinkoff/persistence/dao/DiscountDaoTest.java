@@ -1,7 +1,7 @@
 package com.violetbutterfly.drinkoff.persistence.dao;
 
-import com.violetbutterfly.drinkoff.persistence.PersistenceApplicationContext;
 import com.violetbutterfly.drinkoff.api.enums.Role;
+import com.violetbutterfly.drinkoff.persistence.PersistenceApplicationContext;
 import com.violetbutterfly.drinkoff.persistence.entity.Address;
 import com.violetbutterfly.drinkoff.persistence.entity.Company;
 import com.violetbutterfly.drinkoff.persistence.entity.Discount;
@@ -138,7 +138,7 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         company.setUser(user);
         company.setAddress(address);
         company.setName("companyName");
-        company.setIco("CZ12345678");
+        company.setCrn("CZ12345678");
         company.setUrl("www.example_company_page.cz");
         companyDao.create(company);
 
@@ -161,7 +161,7 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         tempCompany.setAddress(address);
         tempCompany.setPhoneNumber("58545");
         tempCompany.setName("tempCompanyName");
-        tempCompany.setIco("SK987654321");
+        tempCompany.setCrn("SK987654321");
         tempCompany.setUrl("www.another_example_company_page.cz");
         companyDao.create(tempCompany);
 
