@@ -105,6 +105,13 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(discountDao.findByCompany(company).size(), 3);
     }
 
+    @Test
+    public void findDiscountByUserTest() {
+        Assert.assertEquals(discountDao.findByUser(user).size(), 1);
+        createTempDiscounts();
+        Assert.assertEquals(discountDao.findByUser(user).size(), 3);
+    }
+
     private void createTempDiscounts() {
         Discount tempDiscount = new Discount(company, "beer");
         Discount tempDiscount2 = new Discount(company, "milkshake");

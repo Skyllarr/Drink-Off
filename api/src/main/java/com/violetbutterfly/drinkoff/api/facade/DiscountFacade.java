@@ -2,6 +2,7 @@ package com.violetbutterfly.drinkoff.api.facade;
 
 import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
 import com.violetbutterfly.drinkoff.api.dto.DiscountDTO;
+import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface DiscountFacade {
     List<DiscountDTO> findByCompany(CompanyDTO companyWithUserDTO);
 
     List<DiscountDTO> findByProduct(String product);
+
+    List<DiscountDTO> findByUser(UserDTO user);
 }

@@ -2,6 +2,7 @@ package com.violetbutterfly.drinkoff.persistence.dao;
 
 import com.violetbutterfly.drinkoff.persistence.entity.Company;
 import com.violetbutterfly.drinkoff.persistence.entity.Discount;
+import com.violetbutterfly.drinkoff.persistence.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -26,10 +27,18 @@ public class DiscountDao extends AbstractStringIdEntityDao<Discount> {
     }
 
     public List<Discount> findByCompany(Company company) {
-        return em.createQuery("select c from Discount c WHERE c.company.id = :companyId and c.deleted = :deleted",
+        return em.createQuery("select d from Discount d WHERE d.company.id = :companyId and d.deleted = :deleted",
                 Discount.class)
                 .setParameter("deleted", false)
                 .setParameter("companyId", company.getId())
+                .getResultList();
+    }
+
+    public List<Discount> findByUser(User user) {
+        return em.createQuery("select d from Discount d WHERE d.company.user.id = :userId and d.deleted = :deleted",
+                Discount.class)
+                .setParameter("deleted", false)
+                .setParameter("userId", user.getId())
                 .getResultList();
     }
 }
