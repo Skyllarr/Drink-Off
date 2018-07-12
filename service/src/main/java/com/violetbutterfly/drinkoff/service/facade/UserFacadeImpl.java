@@ -38,6 +38,11 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
+    public void delete(String userId) {
+        userDao.delete(userDao.findById(userId));
+    }
+
+    @Override
     public UserDTO findById(String id) {
         return userMapperService.asDTO(userDao.findById(id));
     }

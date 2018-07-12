@@ -22,5 +22,5 @@ public interface DiscountFacade {
 
     List<DiscountDTO> findByProduct(String product);
 
-    List<DiscountDTO> findByUser(UserDTO user);
+    List<DiscountDTO> getDiscounts(UserDTO user);
 }

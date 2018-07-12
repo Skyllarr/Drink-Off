@@ -69,7 +69,7 @@ public class DiscountFacadeImpl implements DiscountFacade {
     }
 
     @Override
-    public List<DiscountDTO> findByUser(UserDTO user) {
+    public List<DiscountDTO> getDiscounts(UserDTO user) {
         List<Discount> discountEntities = discountDao.findByUser(userMapper.asEntity(user));
         return discountEntities.stream()
                 .map(p -> discountMapper.asDTO(p))
