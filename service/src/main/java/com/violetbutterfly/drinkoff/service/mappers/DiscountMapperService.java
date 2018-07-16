@@ -7,7 +7,7 @@ import fr.xebia.extras.selma.Selma;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DiscountMapperService  extends EntityDTOServiceImpl<Discount, DiscountDTO>{
+public class DiscountMapperService extends EntityDTOServiceImpl<Discount, DiscountDTO> {
 
     private DiscountMapper mapper = Selma.builder(DiscountMapper.class).build();
 
@@ -21,7 +21,7 @@ public class DiscountMapperService  extends EntityDTOServiceImpl<Discount, Disco
     public DiscountDTO asDTO(Discount discount) {
         DiscountDTO result = mapper.asDTO(discount);
         if (result != null && discount.getCompany() != null) {
-                result.setCompanyId(discount.getCompany().getId());
+            result.setCompanyId(discount.getCompany().getId());
         }
         return result;
     }

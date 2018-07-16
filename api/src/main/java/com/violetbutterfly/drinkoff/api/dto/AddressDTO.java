@@ -2,7 +2,7 @@ package com.violetbutterfly.drinkoff.api.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class AddressDTO extends SignUpAddressDTO{
+public class AddressDTO extends SignUpAddressDTO {
     @NotBlank
     private String id;
 

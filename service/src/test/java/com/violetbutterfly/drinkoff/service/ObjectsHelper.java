@@ -54,17 +54,22 @@ public class ObjectsHelper {
         return address;
     }
 
-    public static CompanyDTO getCompanyDTO() {
+    public static CompanyNoCrnDTO getCompanyNoCrnDTO() {
         Company company = getCompanyEntity();
+        CompanyNoCrnDTO companyNoCrnDTO = new CompanyNoCrnDTO();
+        companyNoCrnDTO.setName(company.getName());
+        companyNoCrnDTO.setPhoneNumber(company.getPhoneNumber());
+        companyNoCrnDTO.setUserId(getUserDTO().getId());
+        companyNoCrnDTO.setUrl(company.getUrl());
+        companyNoCrnDTO.setId(company.getId());
+        companyNoCrnDTO.setAddress(getAddressDTO());
+        companyNoCrnDTO.setDescription(company.getDescription());
+        return companyNoCrnDTO;
+    }
+
+    public static CompanyDTO getCompanyDTO() {
         CompanyDTO companyDTO = new CompanyDTO();
-        companyDTO.setName(company.getName());
-        companyDTO.setPhoneNumber(company.getPhoneNumber());
-        companyDTO.setUserId(getUserDTO().getId());
-        companyDTO.setCrn(company.getCrn());
-        companyDTO.setUrl(company.getUrl());
-        companyDTO.setId(company.getId());
-        companyDTO.setAddress(getAddressDTO());
-        companyDTO.setDescription(company.getDescription());
+        companyDTO.setCrn(getCompanyEntity().getCrn());
         return companyDTO;
     }
 
@@ -78,7 +83,7 @@ public class ObjectsHelper {
         signUpCompanyDTO.setName(company.getName());
         signUpCompanyDTO.setUrl(company.getUrl());
         signUpCompanyDTO.setPhoneNumber(company.getPhoneNumber());
-        signUpCompanyDTO.setAddress(getAddressDTO());
+        signUpCompanyDTO.setAddress(getSignUpAddressDTO());
         return signUpCompanyDTO;
     }
 
@@ -86,6 +91,18 @@ public class ObjectsHelper {
         Address address = getAddressEntity();
         AddressDTO addressDTO = new AddressDTO();
         addressDTO.setId(address.getId());
+        addressDTO.setCity(address.getCity());
+        addressDTO.setStreet(address.getStreet());
+        addressDTO.setHouseNumber(address.getHouseNumber());
+        addressDTO.setCountry(address.getCountry());
+        addressDTO.setZipcode(address.getZipcode());
+        addressDTO.setState(address.getState());
+        return addressDTO;
+    }
+
+    public static SignUpAddressDTO getSignUpAddressDTO() {
+        Address address = getAddressEntity();
+        SignUpAddressDTO addressDTO = new AddressDTO();
         addressDTO.setCity(address.getCity());
         addressDTO.setStreet(address.getStreet());
         addressDTO.setHouseNumber(address.getHouseNumber());
@@ -110,9 +127,9 @@ public class ObjectsHelper {
         return discount;
     }
 
-    public static CompanyWithUserDTO getCompanyWithUserDTO() {
+    public static CompanyDTO getCompanyWithUserDTO() {
         Company company = getCompanyEntity();
-        CompanyWithUserDTO companyDTO = new CompanyWithUserDTO();
+        CompanyDTO companyDTO = new CompanyDTO();
         companyDTO.setName(company.getName());
         companyDTO.setPhoneNumber(company.getPhoneNumber());
         companyDTO.setUser(getUserDTO());

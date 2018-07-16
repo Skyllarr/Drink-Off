@@ -6,7 +6,7 @@ import fr.xebia.extras.selma.Selma;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AddressMapperService extends EntityDTOServiceImpl<Address, AddressDTO>{
+public class AddressMapperService extends EntityDTOServiceImpl<Address, AddressDTO> {
 
     private AddressMapper mapper = Selma.builder(AddressMapper.class).build();
 

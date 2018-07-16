@@ -2,7 +2,7 @@ package com.violetbutterfly.drinkoff.service.facades;
 
 import com.violetbutterfly.drinkoff.api.dto.AddressDTO;
 import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
-import com.violetbutterfly.drinkoff.api.dto.CompanyWithUserDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.SignUpCompanyDTO;
 import com.violetbutterfly.drinkoff.api.facade.CompanyFacade;
 import com.violetbutterfly.drinkoff.persistence.dao.AddressDao;
@@ -64,9 +64,9 @@ public class CompanyFacadeTest extends AbstractTestNGSpringContextTests {
 
     private Company company;
 
-    private CompanyDTO companyDTO;
+    private CompanyNoCrnDTO companyNoCrnDTO;
 
-    private CompanyWithUserDTO companyWithUserDTO;
+    private CompanyDTO companyDTO;
 
     private User user;
 
@@ -76,31 +76,31 @@ public class CompanyFacadeTest extends AbstractTestNGSpringContextTests {
 
         signUpCompanyDTO = ObjectsHelper.getSignUpCompanyDTO();
         company = ObjectsHelper.getCompanyEntity();
-        companyDTO = ObjectsHelper.getCompanyDTO();
+        companyNoCrnDTO = ObjectsHelper.getCompanyNoCrnDTO();
         address = ObjectsHelper.getAddressEntity();
         user = ObjectsHelper.getUserEntity();
         addressDTO = ObjectsHelper.getAddressDTO();
-        companyWithUserDTO = ObjectsHelper.getCompanyWithUserDTO();
+        companyDTO = ObjectsHelper.getCompanyWithUserDTO();
 
         when(addressMapper.asEntity(addressDTO)).thenReturn(address);
-        when(companyMapper.asDTO(company)).thenReturn(companyDTO);
+        when(companyMapper.asDTO(company)).thenReturn(companyNoCrnDTO);
     }
 
     @Test
     public void signUpTest() {
         companyFacade.signUpCompany(signUpCompanyDTO);
         when(companyDao.findAll()).thenReturn(Arrays.asList(company));
-        List<CompanyDTO> result = companyFacade.findAll();
+        List<CompanyNoCrnDTO> result = companyFacade.findAll();
         assertThat(result.size() == 1);
-        assertThat(result.get(0)).isEqualTo(companyDTO);
+        assertThat(result.get(0)).isEqualTo(companyNoCrnDTO);
     }
 
     @Test
     public void findCompanyByNameTest() {
         companyFacade.signUpCompany(signUpCompanyDTO);
         when(companyDao.findByName(signUpCompanyDTO.getName())).thenReturn(company);
-        CompanyDTO result = companyFacade.findByName(signUpCompanyDTO.getName());
-        assertThat(result).isEqualTo(companyDTO);
+        CompanyNoCrnDTO result = companyFacade.findByName(signUpCompanyDTO.getName());
+        assertThat(result).isEqualTo(companyNoCrnDTO);
     }
 
     @Test
@@ -108,25 +108,25 @@ public class CompanyFacadeTest extends AbstractTestNGSpringContextTests {
         companyFacade.signUpCompany(signUpCompanyDTO);
         when(userDao.findByEmail(user.getEmail())).thenReturn(user);
         when(companyDao.findByUser(user)).thenReturn(company);
-        CompanyDTO result = companyFacade.findByEmail(signUpCompanyDTO.getEmail());
-        assertThat(result).isEqualTo(companyDTO);
+        CompanyNoCrnDTO result = companyFacade.findByEmail(signUpCompanyDTO.getEmail());
+        assertThat(result).isEqualTo(companyNoCrnDTO);
     }
 
     @Test
     public void updateCompanyTest() {
         companyFacade.signUpCompany(signUpCompanyDTO);
         String newUrl = "new_url";
-        companyWithUserDTO.setUrl(newUrl);
         companyDTO.setUrl(newUrl);
+        companyNoCrnDTO.setUrl(newUrl);
         company.setUrl(newUrl);
         when(companyDao.findByName(signUpCompanyDTO.getName())).thenReturn(company);
-        when(companyMapper.asDTO(company)).thenReturn(companyDTO);
-        when(companyWithUserMapper.asDTO(company)).thenReturn(companyWithUserDTO);
-        when(companyWithUserMapper.asEntity(companyWithUserDTO)).thenReturn(company);
+        when(companyMapper.asDTO(company)).thenReturn(companyNoCrnDTO);
+        when(companyWithUserMapper.asDTO(company)).thenReturn(companyDTO);
+        when(companyWithUserMapper.asEntity(companyDTO)).thenReturn(company);
         when(companyDao.update(company)).thenReturn(company);
-        CompanyWithUserDTO updatedResult = companyFacade.update(companyWithUserDTO);
+        CompanyDTO updatedResult = companyFacade.update(companyDTO);
         assertThat(updatedResult.getUrl()).isEqualTo(newUrl);
-        CompanyDTO result = companyFacade.findByName(signUpCompanyDTO.getName());
+        CompanyNoCrnDTO result = companyFacade.findByName(signUpCompanyDTO.getName());
         assertThat(result.getUrl()).isEqualTo(newUrl);
     }
 }

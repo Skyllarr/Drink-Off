@@ -8,5 +8,7 @@ public class UserAuthenticationException extends AuthenticationException {
         super(msg);
     }
 
-    public UserAuthenticationException(String s, Throwable throwable) { super(s, throwable);}
+    public UserAuthenticationException(String s, Throwable throwable) {
+        super(s, throwable);
+    }
 }

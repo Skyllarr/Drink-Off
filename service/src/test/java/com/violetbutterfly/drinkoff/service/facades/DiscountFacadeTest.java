@@ -1,7 +1,7 @@
 package com.violetbutterfly.drinkoff.service.facades;
 
 import com.violetbutterfly.drinkoff.api.dto.AddressDTO;
-import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.DiscountDTO;
 import com.violetbutterfly.drinkoff.api.dto.SignUpCompanyDTO;
 import com.violetbutterfly.drinkoff.api.facade.CompanyFacade;
@@ -76,7 +76,7 @@ public class DiscountFacadeTest extends AbstractTestNGSpringContextTests {
 
     private Company company;
 
-    private CompanyDTO companyDTO;
+    private CompanyNoCrnDTO companyNoCrnDTO;
 
     @BeforeMethod
     public void init() {
@@ -84,14 +84,14 @@ public class DiscountFacadeTest extends AbstractTestNGSpringContextTests {
 
         signUpCompanyDTO = ObjectsHelper.getSignUpCompanyDTO();
         company = ObjectsHelper.getCompanyEntity();
-        companyDTO = ObjectsHelper.getCompanyDTO();
+        companyNoCrnDTO = ObjectsHelper.getCompanyNoCrnDTO();
         address = ObjectsHelper.getAddressEntity();
         addressDTO = ObjectsHelper.getAddressDTO();
         discountDTO = ObjectsHelper.getDiscountDTO();
         discount = ObjectsHelper.getDiscount();
 
         when(addressMapper.asEntity(addressDTO)).thenReturn(address);
-        when(companyMapper.asDTO(company)).thenReturn(companyDTO);
+        when(companyMapper.asDTO(company)).thenReturn(companyNoCrnDTO);
         companyFacade.signUpCompany(signUpCompanyDTO);
     }
 

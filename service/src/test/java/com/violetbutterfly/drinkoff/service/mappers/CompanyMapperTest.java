@@ -1,6 +1,6 @@
 package com.violetbutterfly.drinkoff.service.mappers;
 
-import com.violetbutterfly.drinkoff.api.dto.CompanyWithUserDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
 import com.violetbutterfly.drinkoff.persistence.entity.Company;
 import com.violetbutterfly.drinkoff.service.ObjectsHelper;
 import com.violetbutterfly.drinkoff.service.config.ServiceConfig;
@@ -20,7 +20,7 @@ public class CompanyMapperTest extends AbstractTestNGSpringContextTests {
     private CompanyWithUserMapperService companyWithUserMapper;
 
     private Company entity;
-    private CompanyWithUserDTO dto;
+    private CompanyDTO dto;
 
     @BeforeClass
     public void prepareData() {
@@ -30,7 +30,7 @@ public class CompanyMapperTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void mapDto() {
-        CompanyWithUserDTO result = companyWithUserMapper.asDTO(entity);
+        CompanyDTO result = companyWithUserMapper.asDTO(entity);
         assertThat(result.getUrl()).isEqualTo(dto.getUrl());
         assertThat(result.getId()).isEqualTo(dto.getId());
         assertThat(result.getCrn()).isEqualTo(dto.getCrn());

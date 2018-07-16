@@ -1,11 +1,10 @@
 package com.violetbutterfly.drinkoff.service.facade;
 
-import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.DiscountDTO;
 import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.facade.DiscountFacade;
 import com.violetbutterfly.drinkoff.persistence.dao.DiscountDao;
-import com.violetbutterfly.drinkoff.persistence.entity.Discount;
 import com.violetbutterfly.drinkoff.service.mappers.CompanyMapperService;
 import com.violetbutterfly.drinkoff.service.mappers.DiscountMapperService;
 import com.violetbutterfly.drinkoff.service.mappers.UserMapperService;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -44,35 +42,23 @@ public class DiscountFacadeImpl implements DiscountFacade {
     }
 
     public List<DiscountDTO> findAll() {
-        List<Discount> discountEntities = discountDao.findAll();
-        return discountEntities.stream()
-                .map(p -> discountMapper.asDTO(p))
-                .collect(Collectors.toList());
+        return discountMapper.asDtos(discountDao.findAll());
     }
 
     public DiscountDTO findById(String id) {
         return discountMapper.asDTO(discountDao.findById(id));
     }
 
-    public List<DiscountDTO> findByCompany(CompanyDTO company) {
-        List<Discount> discountEntities = discountDao.findByCompany(companyMapper.asEntity(company));
-        return discountEntities.stream()
-                .map(p -> discountMapper.asDTO(p))
-                .collect(Collectors.toList());
+    public List<DiscountDTO> findByCompany(CompanyNoCrnDTO company) {
+        return discountMapper.asDtos(discountDao.findByCompany(companyMapper.asEntity(company)));
     }
 
     public List<DiscountDTO> findByProduct(String product) {
-        List<Discount> discountEntities = discountDao.findByProduct(product);
-        return discountEntities.stream()
-                .map(p -> discountMapper.asDTO(p))
-                .collect(Collectors.toList());
+        return discountMapper.asDtos(discountDao.findByProduct(product));
     }
 
     @Override
     public List<DiscountDTO> getDiscounts(UserDTO user) {
-        List<Discount> discountEntities = discountDao.findByUser(userMapper.asEntity(user));
-        return discountEntities.stream()
-                .map(p -> discountMapper.asDTO(p))
-                .collect(Collectors.toList());
+        return discountMapper.asDtos(discountDao.findByUser(userMapper.asEntity(user)));
     }
 }

@@ -4,7 +4,6 @@ import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.exception.UserAuthenticationException;
 import com.violetbutterfly.drinkoff.api.facade.UserFacade;
 import com.violetbutterfly.drinkoff.persistence.dao.UserDao;
-import com.violetbutterfly.drinkoff.persistence.entity.User;
 import com.violetbutterfly.drinkoff.service.UserService;
 import com.violetbutterfly.drinkoff.service.mappers.UserMapperService;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,10 +52,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public List<UserDTO> findAll() {
-        List<User> userEntities = userDao.findAll();
-        return userEntities.stream()
-                .map(p -> userMapperService.asDTO(p))
-                .collect(Collectors.toList());
+        return userMapperService.asDtos(userDao.findAll());
     }
 
     @Override
@@ -66,7 +61,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void changePassword(UserDTO userDTO,String oldUnencryptedPassword, String newUnencryptedPassword) throws UserAuthenticationException {
+    public void changePassword(UserDTO userDTO, String oldUnencryptedPassword, String newUnencryptedPassword) throws UserAuthenticationException {
         userService.changePassword(userMapperService.asEntity(userDTO), oldUnencryptedPassword, newUnencryptedPassword);
     }
 }
