@@ -1,0 +1,1 @@
+web/src/main/scripts/build-production.sh
