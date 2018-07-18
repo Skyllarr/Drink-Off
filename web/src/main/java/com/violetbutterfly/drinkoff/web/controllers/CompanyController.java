@@ -3,8 +3,9 @@ package com.violetbutterfly.drinkoff.web.controllers;
 import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
 import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.SignUpCompanyDTO;
-import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.facade.CompanyFacade;
+import com.violetbutterfly.drinkoff.persistence.dao.CompanyDao;
+import com.violetbutterfly.drinkoff.persistence.entity.Company;
 import com.violetbutterfly.drinkoff.persistence.entity.User;
 import com.violetbutterfly.drinkoff.web.Uri;
 import com.violetbutterfly.drinkoff.web.security.ResourceAccess;
@@ -23,15 +24,24 @@ public class CompanyController {
     @Inject
     private CompanyFacade companyFacade;
 
+    @Inject
+    private CompanyDao companyDao;
+
     @RequestMapping(path = Uri.Part.SIGN_UP_COMPANY, method = RequestMethod.POST)
     public SignUpCompanyDTO signUpCompany(@Valid @RequestBody SignUpCompanyDTO company) {
         companyFacade.signUpCompany(company);
         return company;
     }
 
-    @RequestMapping(path = Uri.Part.UPDATE, method = RequestMethod.POST)
-    public CompanyDTO update(@AuthenticationPrincipal User loggedUser, @Valid @RequestBody CompanyDTO company) {
+    @RequestMapping(path = "/{id}", method = RequestMethod.POST)
+    public CompanyDTO update(@AuthenticationPrincipal User loggedUser,
+                             @Valid @RequestBody CompanyDTO company,
+                             @PathVariable("id") String id) {
+        ResourceAccess.hardVerify(id, company.getId());
+        Company verifyCompany = companyDao.findById(id);
+        ResourceAccess.verify(loggedUser, verifyCompany.getUser());
         ResourceAccess.verify(loggedUser, company.getUser());
+        ResourceAccess.weakVerify(loggedUser, company.getAddress().getId(), verifyCompany.getAddress().getId());
         return companyFacade.update(company);
     }
 
@@ -42,8 +52,9 @@ public class CompanyController {
     }
 
     @RequestMapping(path = Uri.Part.ME, method = RequestMethod.GET)
-    public CompanyNoCrnDTO getMyDetails(@AuthenticationPrincipal UserDTO loggedUser) {
-        return companyFacade.findById(loggedUser.getId());
+    public CompanyDTO getMyDetails(@AuthenticationPrincipal User loggedUser) {
+        CompanyDTO result = companyFacade.getMyInfo(loggedUser.getId());
+        return result;
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)

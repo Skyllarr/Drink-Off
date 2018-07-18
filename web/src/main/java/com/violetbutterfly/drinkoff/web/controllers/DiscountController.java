@@ -4,6 +4,7 @@ import com.violetbutterfly.drinkoff.api.dto.DiscountDTO;
 import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.facade.CompanyFacade;
 import com.violetbutterfly.drinkoff.api.facade.DiscountFacade;
+import com.violetbutterfly.drinkoff.api.facade.UserFacade;
 import com.violetbutterfly.drinkoff.persistence.entity.User;
 import com.violetbutterfly.drinkoff.web.Uri;
 import com.violetbutterfly.drinkoff.web.security.ResourceAccess;
@@ -24,6 +25,9 @@ public class DiscountController {
 
     @Inject
     private CompanyFacade companyFacade;
+
+    @Inject
+    private UserFacade userFacade;
 
     @RequestMapping(path = Uri.Part.CREATE, method = RequestMethod.POST)
     public DiscountDTO create(@AuthenticationPrincipal User loggedUser, @Valid @RequestBody DiscountDTO discount) {
@@ -60,7 +64,7 @@ public class DiscountController {
     }
 
     @RequestMapping(path = "/mine", method = RequestMethod.GET)
-    public List<DiscountDTO> getMyDiscounts(@AuthenticationPrincipal UserDTO loggedUser) {
-        return discountFacade.getDiscounts(loggedUser);
+    public List<DiscountDTO> getMyDiscounts(@AuthenticationPrincipal User loggedUser) {
+        return discountFacade.getDiscounts(userFacade.findById(loggedUser.getId()));
     }
 }

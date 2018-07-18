@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CompanyDTO extends CompanyInfoDTO {
-    @NotBlank
+
     private String id;
 
     @NotNull

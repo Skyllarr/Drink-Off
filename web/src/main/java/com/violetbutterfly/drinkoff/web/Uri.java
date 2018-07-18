@@ -18,5 +18,6 @@ public class Uri {
         public static final String ONE_SEGMENT = "/*";
         public static final String FIND = "/find";
         public static final String ME = "/me";
+        public static final String CHANGE_PASSWORD = "/changepassword";
     }
 }

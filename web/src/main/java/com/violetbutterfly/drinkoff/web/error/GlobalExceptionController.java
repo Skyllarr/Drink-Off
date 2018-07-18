@@ -1,5 +1,6 @@
 package com.violetbutterfly.drinkoff.web.error;
 
+import com.violetbutterfly.drinkoff.api.exception.GeneralApiError;
 import com.violetbutterfly.drinkoff.api.exception.UserAuthenticationException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionController {
+
 
     @ExceptionHandler
     @ResponseBody
@@ -44,6 +46,17 @@ public class GlobalExceptionController {
 
         apiError.setErrors(errors);
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ApiError handleException(GeneralApiError x) {
+        List<String> errors = new ArrayList<>(1);
+        errors.add(x.getMessage());
+
+        return new ApiError(errors);
     }
 
     @ExceptionHandler
