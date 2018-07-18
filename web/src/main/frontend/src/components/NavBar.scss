@@ -1,0 +1,47 @@
+@import "bootstrap/scss/bootstrap";
+
+.background-navbar {
+  background-color: #c73f3f
+}
+
+.dropdown-a {
+  color: white;
+}
+
+@include media-breakpoint-up(lg) {
+  .nav-margin-left {
+    margin-left: 12rem !important;
+  }
+
+  .nav-margin-right {
+    margin-right: 12rem !important;
+  }
+}
+
+.app-name {
+  color: #fff !important;
+  &:hover {
+    cursor: pointer !important;
+    color: #fff !important;
+  }
+}
+
+.menu-link {
+  color: rgba(255,255,255,0.5) !important;
+  &:hover {
+    cursor: pointer !important;
+    color: rgba(255,255,255,0.75) !important;
+  }
+}
+
+.not-functional {
+  &:hover {
+    cursor: not-allowed !important;;
+  }
+
+  a {
+    pointer-events:none;
+  }
+}
+
+

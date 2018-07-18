@@ -1,1 +1,1 @@
-web/src/main/scripts/run.sh
+scripts/run.sh

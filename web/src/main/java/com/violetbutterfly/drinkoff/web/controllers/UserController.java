@@ -1,5 +1,6 @@
 package com.violetbutterfly.drinkoff.web.controllers;
 
+import com.violetbutterfly.drinkoff.api.dto.ChangePasswordDTO;
 import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.facade.UserFacade;
 import com.violetbutterfly.drinkoff.persistence.entity.User;
@@ -26,6 +27,12 @@ public class UserController {
         return userFacade.update(user);
     }
 
+    @RequestMapping(path = Uri.Part.CHANGE_PASSWORD, method = RequestMethod.POST)
+    public UserDTO changePassword(@AuthenticationPrincipal User loggedUser, @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
+        return userFacade.changePassword(loggedUser.getId(),
+                changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
+    }
+
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void delete(@AuthenticationPrincipal User loggedUser, @PathVariable("id") String id) {
         ResourceAccess.verifyUserId(loggedUser, id);
@@ -33,7 +40,7 @@ public class UserController {
     }
 
     @RequestMapping(path = Uri.Part.ME, method = RequestMethod.GET)
-    public UserDTO getMyDetails(@AuthenticationPrincipal UserDTO loggedUser) {
+    public UserDTO getMyDetails(@AuthenticationPrincipal User loggedUser) {
         return userFacade.findById(loggedUser.getId());
     }
 

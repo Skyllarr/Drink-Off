@@ -1,0 +1,20 @@
+.action-row {
+    float: right;
+    margin: 1rem !important;
+}
+
+.action-row button {
+    background-color: #D26565;
+    border-color: #D26565;
+}
+
+.action-row button:hover {
+    background-color: #B33838;
+    border-color: #B33838;
+}
+
+.action-row .action-row-secondary-button {
+    background-color: #DD8B8B ;
+    border-color: #DD8B8B ;
+}
+

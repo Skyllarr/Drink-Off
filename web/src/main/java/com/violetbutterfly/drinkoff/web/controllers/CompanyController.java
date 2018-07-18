@@ -3,7 +3,6 @@ package com.violetbutterfly.drinkoff.web.controllers;
 import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
 import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.SignUpCompanyDTO;
-import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.facade.CompanyFacade;
 import com.violetbutterfly.drinkoff.persistence.entity.User;
 import com.violetbutterfly.drinkoff.web.Uri;
@@ -42,8 +41,9 @@ public class CompanyController {
     }
 
     @RequestMapping(path = Uri.Part.ME, method = RequestMethod.GET)
-    public CompanyNoCrnDTO getMyDetails(@AuthenticationPrincipal UserDTO loggedUser) {
-        return companyFacade.findById(loggedUser.getId());
+    public CompanyDTO getMyDetails(@AuthenticationPrincipal User loggedUser) {
+        CompanyDTO result = companyFacade.getMyInfo(loggedUser.getId());
+        return result;
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)

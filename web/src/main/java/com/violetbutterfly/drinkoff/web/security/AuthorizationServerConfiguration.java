@@ -22,9 +22,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private static final String[] SCOPES = new String[]{"read", "write", "trust"};
     private static final String[] GRANT_TYPES = new String[]{"password", "authorization_code", "refresh_token", "implicit"};
     private static final String[] AUTHORITIES = new String[]{"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT"};
-    private static final int WEB_ACCESS_TOKEN_VALIDITY = 300; // seconds
-    private static final int REST_ACCESS_TOKEN_VALIDITY = 600;
-    private static final int REFRESH_TOKEN_VALIDITY = 1200;
+    private static final int WEB_ACCESS_TOKEN_VALIDITY = 360; // seconds
+    private static final int REST_ACCESS_TOKEN_VALIDITY = 50;
+    private static final int REFRESH_TOKEN_VALIDITY = 50;
 
     @Inject
     private TokenStore tokenStore;

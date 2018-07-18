@@ -20,20 +20,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(User user, String oldUnencryptedPassword, String newUnencryptedPassword)
+    public User changePassword(User user, String oldUnencryptedPassword, String newUnencryptedPassword)
             throws UserAuthenticationException {
-        if (StringUtils.isEmpty(oldUnencryptedPassword)) {
-            throw new IllegalArgumentException("old Password is empty");
-        }
-        if (StringUtils.isEmpty(newUnencryptedPassword)) {
-            throw new IllegalArgumentException("new Password is empty");
-        }
-        if (user == null) {
-            throw new IllegalArgumentException("User id null");
-        }
         if (AuthenticationUtils.verifyPassword(oldUnencryptedPassword, user.getPasswordHash())) {
             user.setPasswordHash(AuthenticationUtils.createHash(newUnencryptedPassword));
-            userDao.update(user);
+            return userDao.update(user);
+        } else {
+            throw new IllegalArgumentException("Invalid Old Password");
         }
     }
 

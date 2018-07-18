@@ -130,6 +130,14 @@ public class CompanyDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(found.stream().allMatch(c -> c.getAddress().getCity().contains(company.getAddress().getCity())));
     }
 
+    @Test
+    public void editAddressTest() {
+        company.setUser(user2);
+        companyDao.update(company);
+        Company foundCompany = companyDao.findById(company.getId());
+        assertThat(foundCompany, new ReflectionEquals(company));
+    }
+
     private void createTestObjects() {
         user1 = new User();
         user1.setDeleted(false);
@@ -173,7 +181,15 @@ public class CompanyDaoTest extends AbstractTestNGSpringContextTests {
         Company tempCompany = new Company();
         tempCompany.setName("tempName");
         tempCompany.setUser(user2);
-        tempCompany.setAddress(address);
+        Address addressBratislava = new Address();
+        addressBratislava.setCity("Bratislava");
+        addressBratislava.setStreet("Bratislavska");
+        addressBratislava.setHouseNumber("46");
+        addressBratislava.setCountry("Slovakia");
+        addressBratislava.setZipcode("48521");
+        addressBratislava.setState("Slovakia");
+        addressDao.create(addressBratislava);
+        tempCompany.setAddress(addressBratislava);
         tempCompany.setPhoneNumber("58545");
         tempCompany.setCrn("SK987654321");
         tempCompany.setUrl("www.another_example_company_page.cz");

@@ -15,6 +15,7 @@ public class SignUpCompanyDTO extends CompanyInfoDTO {
     private String email;
 
     @NotBlank
+    @Size(min = 5)
     private String password;
 
     @NotBlank

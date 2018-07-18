@@ -5,10 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Company extends AbstractStringIdEntity {
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Address address;
 
-    @OneToOne(optional = false, fetch = FetchType.EAGER)
+    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
     @Column(nullable = false, length = 20)
