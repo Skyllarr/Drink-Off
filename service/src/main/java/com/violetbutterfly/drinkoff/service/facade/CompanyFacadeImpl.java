@@ -1,7 +1,7 @@
 package com.violetbutterfly.drinkoff.service.facade;
 
 import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
-import com.violetbutterfly.drinkoff.api.dto.CompanyWithUserDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.SignUpCompanyDTO;
 import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.enums.Role;
@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -51,12 +50,12 @@ public class CompanyFacadeImpl implements CompanyFacade {
 
 
     @Override
-    public CompanyWithUserDTO update(CompanyWithUserDTO companyWithUserDTO) {
-        return companyWithUserMapper.asDTO(companyDao.update(companyWithUserMapper.asEntity(companyWithUserDTO)));
+    public CompanyDTO update(CompanyDTO companyDTO) {
+        return companyWithUserMapper.asDTO(companyDao.update(companyWithUserMapper.asEntity(companyDTO)));
     }
 
     @Override
-    public CompanyDTO findById(String id) {
+    public CompanyNoCrnDTO findById(String id) {
         return companyMapper.asDTO(companyDao.findById(id));
     }
 
@@ -66,30 +65,27 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public List<CompanyDTO> findAll() {
-        List<Company> companyEntities = companyDao.findAll();
-        return companyEntities.stream()
-                .map(p -> companyMapper.asDTO(p))
-                .collect(Collectors.toList());
+    public List<CompanyNoCrnDTO> findAll() {
+        return companyMapper.asDtos(companyDao.findAll());
     }
 
     @Override
-    public CompanyDTO findByUser(UserDTO userDTO) {
+    public CompanyNoCrnDTO findByUser(UserDTO userDTO) {
         return companyMapper.asDTO(companyDao.findByUser(userMapper.asEntity(userDTO)));
     }
 
     @Override
-    public CompanyDTO findByName(String name) {
+    public CompanyNoCrnDTO findByName(String name) {
         return companyMapper.asDTO(companyDao.findByName(name));
     }
 
     @Override
-    public CompanyDTO findByIco(String ico) {
+    public CompanyNoCrnDTO findByIco(String ico) {
         return companyMapper.asDTO(companyDao.findByIco(ico));
     }
 
     @Override
-    public CompanyDTO findByEmail(String email) {
+    public CompanyNoCrnDTO findByEmail(String email) {
         return companyMapper.asDTO(companyDao.findByUser(userDao.findByEmail(email)));
     }
 
@@ -104,9 +100,11 @@ public class CompanyFacadeImpl implements CompanyFacade {
         company.setName(signUpCompanyDTO.getName());
         company.setDescription(signUpCompanyDTO.getDescription());
         company.setPhoneNumber(signUpCompanyDTO.getPhoneNumber());
+        company.setUrl(signUpCompanyDTO.getUrl());
+        company.setCrn(signUpCompanyDTO.getCrn());
         userDao.create(user);
         company.setUser(user);
-        Address address = addressMapper.asEntity(signUpCompanyDTO.getAddress());
+        Address address = new Address(signUpCompanyDTO.getAddress().getStreet(), signUpCompanyDTO.getAddress().getHouseNumber(), signUpCompanyDTO.getAddress().getCity(), signUpCompanyDTO.getAddress().getState(), signUpCompanyDTO.getAddress().getCountry(), signUpCompanyDTO.getAddress().getZipcode());
         addressDao.create(address);
         company.setAddress(address);
         companyDao.create(company);

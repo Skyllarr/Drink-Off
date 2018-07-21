@@ -1,6 +1,6 @@
 package com.violetbutterfly.drinkoff.service.mappers;
 
-import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.persistence.entity.Company;
 import com.violetbutterfly.drinkoff.persistence.entity.User;
 import fr.xebia.extras.selma.Selma;
@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 @Service
-public class CompanyMapperService extends EntityDTOServiceImpl<Company, CompanyDTO> {
+public class CompanyMapperService extends EntityDTOServiceImpl<Company, CompanyNoCrnDTO> {
 
     private CompanyMapper mapper = Selma.builder(CompanyMapper.class).build();
+    @Inject
+    private AddressMapperService addressMapper;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -19,12 +21,9 @@ public class CompanyMapperService extends EntityDTOServiceImpl<Company, CompanyD
         return mapper;
     }
 
-    @Inject
-    private AddressMapperService addressMapper;
-
     @Override
-    public CompanyDTO asDTO(Company company) {
-        CompanyDTO result = mapper.asDTO(company);
+    public CompanyNoCrnDTO asDTO(Company company) {
+        CompanyNoCrnDTO result = mapper.asDTO(company);
         if (result != null && company.getUser() != null) {
             result.setUserId(company.getUser().getId());
         }
@@ -35,16 +34,16 @@ public class CompanyMapperService extends EntityDTOServiceImpl<Company, CompanyD
     }
 
     @Override
-    public Company asEntity(CompanyDTO companyDTO) {
-        Company result = mapper.asEntity(companyDTO);
+    public Company asEntity(CompanyNoCrnDTO companyNoCrnDTO) {
+        Company result = mapper.asEntity(companyNoCrnDTO);
         if (result != null) {
-            if (companyDTO.getUserId() != null) {
+            if (companyNoCrnDTO.getUserId() != null) {
                 User user = new User();
-                user.setId(companyDTO.getUserId());
+                user.setId(companyNoCrnDTO.getUserId());
                 result.setUser(user);
             }
-            if (companyDTO.getAddress() != null) {
-                result.setAddress(addressMapper.asEntity(companyDTO.getAddress()));
+            if (companyNoCrnDTO.getAddress() != null) {
+                result.setAddress(addressMapper.asEntity(companyNoCrnDTO.getAddress()));
             }
         }
         return result;

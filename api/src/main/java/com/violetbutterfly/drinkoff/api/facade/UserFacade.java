@@ -11,6 +11,8 @@ public interface UserFacade {
 
     void delete(UserDTO user);
 
+    void delete(String userId);
+
     UserDTO findById(String id);
 
     UserDTO findByEmail(String email);

@@ -1,6 +1,6 @@
 package com.violetbutterfly.drinkoff.service.mappers;
 
-import com.violetbutterfly.drinkoff.api.dto.CompanyWithUserDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
 import com.violetbutterfly.drinkoff.persistence.entity.Company;
 import fr.xebia.extras.selma.Selma;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 @Service
-public class CompanyWithUserMapperService extends EntityDTOServiceImpl<Company, CompanyWithUserDTO> {
+public class CompanyWithUserMapperService extends EntityDTOServiceImpl<Company, CompanyDTO> {
 
     private CompanyWithUserMapper mapper = Selma.builder(CompanyWithUserMapper.class).build();
+    @Inject
+    private UserMapperService userMapper;
+    @Inject
+    private AddressMapperService addressMapper;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -18,15 +22,9 @@ public class CompanyWithUserMapperService extends EntityDTOServiceImpl<Company, 
         return mapper;
     }
 
-    @Inject
-    private UserMapperService userMapper;
-
-    @Inject
-    private AddressMapperService addressMapper;
-
     @Override
-    public CompanyWithUserDTO asDTO(Company company) {
-        CompanyWithUserDTO result = mapper.asDTO(company);
+    public CompanyDTO asDTO(Company company) {
+        CompanyDTO result = mapper.asDTO(company);
         if (result != null && company.getUser() != null) {
             result.setUser(userMapper.asDTO(company.getUser()));
         }
@@ -37,14 +35,14 @@ public class CompanyWithUserMapperService extends EntityDTOServiceImpl<Company, 
     }
 
     @Override
-    public Company asEntity(CompanyWithUserDTO companyWithUserDTO) {
-        Company result = mapper.asEntity(companyWithUserDTO);
+    public Company asEntity(CompanyDTO companyDTO) {
+        Company result = mapper.asEntity(companyDTO);
         if (result != null) {
-            if (companyWithUserDTO.getUser() != null) {
-                result.setUser(userMapper.asEntity(companyWithUserDTO.getUser()));
+            if (companyDTO.getUser() != null) {
+                result.setUser(userMapper.asEntity(companyDTO.getUser()));
             }
-            if (companyWithUserDTO.getAddress() != null) {
-                result.setAddress(addressMapper.asEntity(companyWithUserDTO.getAddress()));
+            if (companyDTO.getAddress() != null) {
+                result.setAddress(addressMapper.asEntity(companyDTO.getAddress()));
             }
         }
         return result;

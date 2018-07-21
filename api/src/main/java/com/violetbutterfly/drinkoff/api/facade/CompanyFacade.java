@@ -1,7 +1,7 @@
 package com.violetbutterfly.drinkoff.api.facade;
 
 import com.violetbutterfly.drinkoff.api.dto.CompanyDTO;
-import com.violetbutterfly.drinkoff.api.dto.CompanyWithUserDTO;
+import com.violetbutterfly.drinkoff.api.dto.CompanyNoCrnDTO;
 import com.violetbutterfly.drinkoff.api.dto.SignUpCompanyDTO;
 import com.violetbutterfly.drinkoff.api.dto.UserDTO;
 import com.violetbutterfly.drinkoff.api.exception.UserAuthenticationException;
@@ -10,21 +10,21 @@ import java.util.List;
 
 public interface CompanyFacade {
 
-    CompanyWithUserDTO update(CompanyWithUserDTO company);
+    CompanyDTO update(CompanyDTO company);
 
-    CompanyDTO findById(String id);
+    CompanyNoCrnDTO findById(String id);
 
     void delete(String id);
 
-    List<CompanyDTO> findAll();
+    List<CompanyNoCrnDTO> findAll();
 
-    CompanyDTO findByUser(UserDTO userDTO);
+    CompanyNoCrnDTO findByUser(UserDTO userDTO);
 
-    CompanyDTO findByName(String name);
+    CompanyNoCrnDTO findByName(String name);
 
-    CompanyDTO findByEmail(String email);
+    CompanyNoCrnDTO findByEmail(String email);
 
-    CompanyDTO findByIco(String ico);
+    CompanyNoCrnDTO findByIco(String ico);
 
     void signUpCompany(SignUpCompanyDTO signUpCompanyDTO) throws UserAuthenticationException;
 }

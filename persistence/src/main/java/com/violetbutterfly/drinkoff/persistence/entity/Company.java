@@ -78,7 +78,7 @@ public class Company extends AbstractStringIdEntity {
         return crn;
     }
 
-    public void setCrn(String ico) {
-        this.crn = ico;
+    public void setCrn(String crn) {
+        this.crn = crn;
     }
 }

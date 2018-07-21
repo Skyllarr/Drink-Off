@@ -5,5 +5,5 @@ import com.violetbutterfly.drinkoff.persistence.entity.Address;
 import fr.xebia.extras.selma.Mapper;
 
 @Mapper(withIgnoreFields = {"deleted"})
-public interface AddressMapper extends EntityDTOMapper<Address, AddressDTO>{
+public interface AddressMapper extends EntityDTOMapper<Address, AddressDTO> {
 }
