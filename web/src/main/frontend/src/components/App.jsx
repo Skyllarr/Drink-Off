@@ -13,6 +13,7 @@ import Profile from "./Profile"
 import NavBar from './NavBar'
 import InputCompanyInfo from "./InputCompanyInfo"
 import Discounts from './Discounts'
+import ChangePasswordDialog from "./ChangePasswordDialog"
 import ErrorBar from './ErrorBar'
 
 const App = ({appError, dismissError}) => (
@@ -29,6 +30,7 @@ const App = ({appError, dismissError}) => (
                     <AuthRoute exact path="/discounts" component={Discounts}/>
                     <AuthRoute exact path="/profile" component={Profile}/>
                     <AuthRoute exact path="/update" component={InputCompanyInfo}/>
+                    <AuthRoute exact path="/password" component={ChangePasswordDialog}/>
                 </Switch>
             </Col>
         </div>
