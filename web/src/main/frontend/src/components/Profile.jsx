@@ -127,6 +127,10 @@ class Profile extends Component {
                                                     </div>
                                                 </div> : null}
                                             <div className="btn-toolbar row ml-2 action-row">
+                                                <Button type="button" className="btn btn-primary mr-2 action-row-secondary-button" onClick={() => {
+                                                    nextPath('/password')
+                                                }}>Change Password
+                                                </Button>
                                                 <Button type="button" className="btn btn-primary" onClick={() => {
                                                     nextPath('/update')
                                                 }}>Update Profile

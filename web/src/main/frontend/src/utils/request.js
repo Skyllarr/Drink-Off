@@ -127,3 +127,28 @@ export function editCompanyInfo(company) {
             )
     })
 }
+
+export function changePassword(oldPassword, newPassword) {
+    let body = {
+        oldPassword,
+        newPassword
+    }
+    return new Promise((resolve, reject) => {
+        postRequest('/api/user/changepassword', body)
+            .then(() => {
+                    getStore().dispatch(setPassword(newPassword))
+                    resolve('Password successfully updated')
+                }
+            )
+            .catch(responseObject => {
+                if (responseObject.response.status === 400) {
+                    reject({message: responseObject.message})
+                }
+                else if (responseObject.response.status === 403) {
+                    reject({message: 'Cannot access this page'})
+                } else {
+                    reject({message: 'Password have not been updated'})
+                }
+            })
+    })
+}
