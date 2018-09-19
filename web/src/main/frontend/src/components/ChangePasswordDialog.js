@@ -12,8 +12,17 @@ class ChangePasswordDialog extends Component {
             oldPassword: "",
             newPassword: "",
             passwordCheck: "",
+            changePasswordError: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    checkPasswordsMatch = () => {
+        let match = this.state.newPassword === this.state.passwordCheck
+        if (!match) {
+            this.setState({changePasswordError: "New password does not match with confirmation password"})
+        }
+        return match
     }
 
     handleChange(name, event) {
@@ -22,24 +31,26 @@ class ChangePasswordDialog extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.setState({signUpError: null})
-        changePassword(this.state.oldPassword, this.state.newPassword).then(
-            () => {
-                nextPath('/profile')
-            }
-        ).catch((result) => {
-            if (result.message != null) {
-                this.setState({signUpError: result.message})
-            }
-        })
+        this.setState({changePasswordError: null})
+        if (this.checkPasswordsMatch()) {
+            changePassword(this.state.oldPassword, this.state.newPassword).then(
+                () => {
+                    nextPath('/profile')
+                }
+            ).catch((result) => {
+                if (result.message != null) {
+                    this.setState({changePasswordError: result.message})
+                }
+            })
+        }
     }
 
     render() {
         let errorLabel = null
-        if (this.state.signUpError) {
+        if (this.state.changePasswordError) {
             errorLabel = (
                 <Alert color="danger">
-                    {this.state.signUpError}
+                    {this.state.changePasswordError}
                 </Alert>)
         }
         return <Col>
@@ -64,6 +75,7 @@ class ChangePasswordDialog extends Component {
                                    id="new-password"
                                    value={this.state.newPassword}
                                    onChange={this.handleChange.bind(this, "newPassword")}
+                                   minLength="5"
                                    required="required"/>
                         </Col>
                     </FormGroup>
@@ -75,6 +87,7 @@ class ChangePasswordDialog extends Component {
                                    id="confirm-password"
                                    value={this.state.passwordCheck}
                                    onChange={this.handleChange.bind(this, "passwordCheck")}
+                                   minLength="5"
                                    required="required"/>
                         </Col>
                     </FormGroup>
