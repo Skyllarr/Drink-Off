@@ -11,7 +11,7 @@ WEB_RESOURCES_DIR="$WEB_MAIN_DIR/resources"
 "$SCRIPTS_DIR/clean.sh"
 
 yarn --cwd "$FRONTEND_DIR" install
-yarn build-css
+yarn --cwd "$FRONTEND_DIR" build-css
 
 GENERATE_SOURCEMAP=false yarn --cwd "$FRONTEND_DIR" build # yarn run build
 cp -R "$FRONTEND_DIR/build/". "$WEB_MAIN_DIR/webapp"
