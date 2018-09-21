@@ -21,5 +21,5 @@ public interface UserFacade {
 
     boolean authenticate(UserDTO userDTO, String password) throws UserAuthenticationException;
 
-    void changePassword(UserDTO userDTO, String oldUnencryptedPassword, String newUnencryptedPassword) throws UserAuthenticationException;
+    UserDTO changePassword(String userId, String oldUnencryptedPassword, String newUnencryptedPassword) throws UserAuthenticationException;
 }

@@ -47,7 +47,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     };
 
     private static final String[] me = new String[]{
-            ROOT_URI_USER + Uri.Part.ME
+            ROOT_URI_USER + Uri.Part.ME,
+            ROOT_URI_USER + Uri.Part.CHANGE_PASSWORD
     };
 
     private static final String[] findById = new String[]{

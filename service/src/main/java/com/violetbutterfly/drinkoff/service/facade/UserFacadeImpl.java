@@ -1,6 +1,7 @@
 package com.violetbutterfly.drinkoff.service.facade;
 
 import com.violetbutterfly.drinkoff.api.dto.UserDTO;
+import com.violetbutterfly.drinkoff.api.exception.GeneralApiError;
 import com.violetbutterfly.drinkoff.api.exception.UserAuthenticationException;
 import com.violetbutterfly.drinkoff.api.facade.UserFacade;
 import com.violetbutterfly.drinkoff.persistence.dao.UserDao;
@@ -61,7 +62,13 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void changePassword(UserDTO userDTO, String oldUnencryptedPassword, String newUnencryptedPassword) throws UserAuthenticationException {
-        userService.changePassword(userMapperService.asEntity(userDTO), oldUnencryptedPassword, newUnencryptedPassword);
+    public UserDTO changePassword(String userId, String oldUnencryptedPassword, String newUnencryptedPassword)
+            throws UserAuthenticationException, GeneralApiError {
+        try {
+            return userMapperService.asDTO(
+                    userService.changePassword(userDao.findById(userId), oldUnencryptedPassword, newUnencryptedPassword));
+        } catch (IllegalArgumentException e) {
+            throw new GeneralApiError(e.getMessage(), e);
+        }
     }
 }

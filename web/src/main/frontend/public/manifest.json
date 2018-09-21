@@ -1,0 +1,16 @@
+{
+  "short_name": "Drink Off",
+  "name": "Drink Off",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      // source: https://www.freefavicon.com/freefavicons/food/iconinfo/cocktail-3-152-301573.html
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

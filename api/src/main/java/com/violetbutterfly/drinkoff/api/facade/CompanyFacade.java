@@ -14,6 +14,10 @@ public interface CompanyFacade {
 
     CompanyNoCrnDTO findById(String id);
 
+    CompanyNoCrnDTO findByUserId(String id);
+
+    CompanyDTO getMyInfo(String id);
+
     void delete(String id);
 
     List<CompanyNoCrnDTO> findAll();

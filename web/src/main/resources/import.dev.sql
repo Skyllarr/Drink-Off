@@ -1,8 +1,8 @@
 INSERT INTO Account (uuid, nick, email, passwordHash, type, deleted) VALUES ('playerUserId', 'x_smiley_x', 'smiley@dmail.com', '1000:ZyL+mkKymCPKWkNGrT3BKROlaifRAVA2:n9NQlLRktQuIFJuNgR2DRgnM', 'PLAYER', false);
-INSERT INTO Account (uuid, nick, email, passwordHash, type, deleted) VALUES ('companyUserId', 'company', 'company@dmail.com', '1000:ZyL+mkKymCPKWkNGrT3BKROlaifRAVA2:n9NQlLRktQuIFJuNgR2DRgnM', 'COMPANY', false);
-INSERT INTO Address (uuid, street, houseNumber, city, state, country, zipcode, deleted) VALUES ('addressId', 'Hrnciarska', '54', 'Brno', 'Cornwall', 'Czech Republic', '58564', false);
-INSERT INTO Company (uuid, address_uuid, "USER_UUID", phoneNumber, name, url, crn, description, deleted) VALUES ('companyId', (SELECT uuid from Address WHERE street='Hrnciarska'), (SELECT uuid from Account WHERE email='company@dmail.com'),'123456789', 'Best Company', 'www.best-company.cz', 'CRN123456789', 'We are the best company by far.', false);
+INSERT INTO Account (uuid, nick, email, passwordHash, type, deleted) VALUES ('user2', 'Drinks and cocktails', 'company@dmail.com', '1000:ZyL+mkKymCPKWkNGrT3BKROlaifRAVA2:n9NQlLRktQuIFJuNgR2DRgnM', 'COMPANY', false);
+INSERT INTO Address (uuid, street, houseNumber, city, state, country, zipcode, deleted) VALUES ('addressId', 'Hrncirska', '54/16', 'Brno', 'Jihomoravsky kraj', 'Czech Republic', '60200', false);
+INSERT INTO Company (uuid, address_uuid, "USER_UUID", phoneNumber, name, url, crn, description, deleted) VALUES ('companyId', (SELECT uuid from Address WHERE street='Hrncirska'), (SELECT uuid from Account WHERE email='company@dmail.com'),'123456789', 'Drinks and cocktails', 'www.cocktails-drinks.cz', 'CRN123456789', 'Come to us for the best Manhattan and pina colada cocktail.', false);
 INSERT INTO Discount (uuid, company_uuid, product, deleted) VALUES ('discountId1', (SELECT uuid from Company WHERE phoneNumber='123456789'), 'beer', false );
-INSERT INTO Discount (uuid, company_uuid, product, deleted) VALUES ('discountId2', (SELECT uuid from Company WHERE phoneNumber='123456789'), 'cocktail', false );
-INSERT INTO Discount (uuid, company_uuid, product, deleted) VALUES ('discountId3', (SELECT uuid from Company WHERE phoneNumber='123456789'), 'cola', false );
+INSERT INTO Discount (uuid, company_uuid, product, deleted) VALUES ('discountId2', (SELECT uuid from Company WHERE phoneNumber='123456789'), 'pina colada', false );
+INSERT INTO Discount (uuid, company_uuid, product, deleted) VALUES ('discountId3', (SELECT uuid from Company WHERE phoneNumber='123456789'), 'manhattan', false );
 INSERT INTO Account (uuid, nick, email, passwordHash, type, deleted) VALUES ('adminId', 'admin', 'admin@dmail.com', '1000:ZyL+mkKymCPKWkNGrT3BKROlaifRAVA2:n9NQlLRktQuIFJuNgR2DRgnM', 'ADMIN', false);

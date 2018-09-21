@@ -164,8 +164,18 @@ public class DiscountDaoTest extends AbstractTestNGSpringContextTests {
         user2.setType(Role.PLAYER);
         user2.setPasswordHash("passHash");
         userDao.create(user2);
+
+        Address addressBratislava = new Address();
+        addressBratislava.setCity("Bratislava");
+        addressBratislava.setStreet("Bratislavska");
+        addressBratislava.setHouseNumber("46");
+        addressBratislava.setCountry("Slovakia");
+        addressBratislava.setZipcode("48521");
+        addressBratislava.setState("Slovakia");
+        addressDao.create(addressBratislava);
+
         tempCompany.setUser(user2);
-        tempCompany.setAddress(address);
+        tempCompany.setAddress(addressBratislava);
         tempCompany.setPhoneNumber("58545");
         tempCompany.setName("tempCompanyName");
         tempCompany.setCrn("SK987654321");

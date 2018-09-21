@@ -48,15 +48,27 @@ public class CompanyFacadeImpl implements CompanyFacade {
     @Inject
     private CompanyDao companyDao;
 
-
     @Override
     public CompanyDTO update(CompanyDTO companyDTO) {
-        return companyWithUserMapper.asDTO(companyDao.update(companyWithUserMapper.asEntity(companyDTO)));
+        Company companyToUpdate = companyWithUserMapper.asEntity(companyDTO);
+        User userWithPasswordHash = userDao.findById(companyToUpdate.getUser().getId());
+        companyToUpdate.setUser(userWithPasswordHash);
+        return companyWithUserMapper.asDTO(companyDao.update(companyToUpdate));
     }
 
     @Override
     public CompanyNoCrnDTO findById(String id) {
         return companyMapper.asDTO(companyDao.findById(id));
+    }
+
+    @Override
+    public CompanyNoCrnDTO findByUserId(String id) {
+        return companyMapper.asDTO(companyDao.findByUser(userDao.findById(id)));
+    }
+
+    @Override
+    public CompanyDTO getMyInfo(String id) {
+        return companyWithUserMapper.asDTO(companyDao.findByUser(userDao.findById(id)));
     }
 
     @Override

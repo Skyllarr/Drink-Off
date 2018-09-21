@@ -7,7 +7,7 @@ public interface UserService {
 
     boolean authenticate(User user, String password) throws UserAuthenticationException;
 
-    void changePassword(User user, String oldPassword, String newPassword) throws UserAuthenticationException;
+    User changePassword(User user, String oldPassword, String newPassword) throws UserAuthenticationException;
 
     User findByEmail(String email);
 }

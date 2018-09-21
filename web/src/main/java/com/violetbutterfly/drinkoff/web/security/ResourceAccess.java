@@ -26,6 +26,18 @@ public class ResourceAccess {
         verifyUserId(loggedUser, user == null ? null : user.getId());
     }
 
+    public static void hardVerify(String value, String valueToCompare) {
+        if (!value.equals(valueToCompare)) {
+            throw new UserAuthenticationException(ACCESS_DENIED);
+        }
+    }
+
+    public static void weakVerify(User loggedUser, String value, String valueToCompare) {
+        if (!value.equals(valueToCompare) && (loggedUser.getType() != Role.ADMIN)) {
+            throw new UserAuthenticationException(ACCESS_DENIED);
+        }
+    }
+
     public static void verify(User loggedUser, CompanyNoCrnDTO company) {
         verifyUserId(loggedUser, company == null ? null : company.getUserId());
     }
